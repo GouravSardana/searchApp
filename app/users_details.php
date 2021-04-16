@@ -17,6 +17,10 @@ class users_details extends Model
         return $this->hasOne('App\users_parent_details', 'user_id', 'id');
     }
 
+    public function school(){
+        return $this->hasOne('App\school_details', 'user_id', 'id');
+    }
+
 }
 // ->with(['student' => function($query) {
 //     $query->selectRaw('user_detail_id, firstName, surname, image_240 as image, inv_parent');

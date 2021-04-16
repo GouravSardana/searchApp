@@ -38,31 +38,50 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Email</th>
                         <th>Parent Name</th>
                         <th>Parent Email</th>
                         <th>Phone</th>
+                        <th>School Name</th>
+                        <th>School Equired</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $dummy)
-                    <tr>
-                        <td>{{$dummy->first_name}}</td>
-                        <td>{{$dummy->email}}</td>
-                        @if($dummy->parent == "")
-                            <td>N/A</td>
-                            <td>N/A</td>
-                        
-                        @else
-                            <td>{{$dummy->parent->parent_name}}</td>
-                            <td>{{$dummy->parent->parent_email}}</td>
-                        
-                        @endif
-                        <td>{{$dummy->phone}}</td>
-                    </tr>
-                    @endforeach
-    
+                    @if($users == [])
+                        <td>No data Found</td>
+                    @else
+                    
+                        @foreach($users as $dummy)
+                        <tr>
+                            <td>{{$dummy->first_name}}</td>
+                            <td>{{$dummy->last_name}}</td>
+                            <td>{{$dummy->email}}</td>
+                            @if($dummy->parent == "")
+                                <td>N/A</td>
+                                <td>N/A</td>
+                            
+                            @else
+                                <td>{{$dummy->parent->parent_name}}</td>
+                                <td>{{$dummy->parent->parent_email}}</td>
+                            
+                            @endif
+                            <td>{{$dummy->phone}}</td>
+
+                            @if($dummy->school == "")
+                                <td>N/A</td>
+                                <td>N/A</td>
+                            
+                            @else
+                                <td>{{$dummy->school->school_name}}</td>
+                                <td>{{$dummy->school->school_equired}}</td>
+                            
+                            @endif
+
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
             {!! $users->render() !!}@endif
