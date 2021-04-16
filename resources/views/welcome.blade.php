@@ -23,7 +23,7 @@
                 {{ csrf_field() }}
                 <div class="input-group">
                     <input type="text" class="form-control" name="q"
-                        placeholder="Search users"> <span class="input-group-btn">
+                        placeholder="Search users" id= "mySearch"> <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
@@ -87,4 +87,8 @@
             {!! $users->render() !!}@endif
     </div>
     </body>
+    <script>
+    var searchTerms = mySearch.value;
+    console.log(searchTerms);
+    </script>
 </html>

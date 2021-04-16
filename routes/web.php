@@ -29,6 +29,8 @@ Route::any ( '/search', function () {
         $users = users_details::where ( 'first_name', 'LIKE', '%' . $q . '%' )
         ->orWhere ( 'email', 'LIKE', '%' . $q . '%' )
         ->orWhere ( 'last_name', 'LIKE', '%' . $q . '%' )
+        ->orWhere ( DB::raw('CONCAT_WS(" ", first_name, last_name)'), 'LIKE', '%' . $q . '%' )
+
         ->with(['parent'], function($query) use($q) {
             $query->where('parent_name', 'LIKE', '%' . $q . '%');
             $query->orWhere('parent_email', 'LIKE', '%' . $q . '%');

@@ -35,11 +35,23 @@ class User extends Controller
 
         $residential = new residential_details;
         $residential->user_id = $user->id;
-        $residential->city = $req->city;
-        $residential->state = $req->state;
-        $residential->country = $req->country;
+        if($req->city == null || $req->city == ""){
+            $residential->city = "";
+        }else{
+            $residential->city = $req->city;
+        }
+        if($req->state == null || $req->state == ""){
+            $residential->state = "";
+        }else{
+            $residential->state = $req->state;
+        }
+        if($req->country == null || $req->country == ""){
+            $residential->country = "";
+        }else{
+            $residential->country = $req->country;
+        }
+        
         $residential->save(); 
 
-        // echo $user->save();
     }
 }
