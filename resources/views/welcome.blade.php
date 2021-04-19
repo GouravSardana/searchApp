@@ -27,9 +27,19 @@
                         <button type="submit" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
-                    </span>
+                    </span>                    
                 </div>
             </form>
+            
+    </div>
+    <div class="container">
+    @foreach($data as $d)
+        @if($d == "")
+            <td></td>
+        @else
+            <button class="close"  style="font-weight:bold;">{{$d}}  <a href="/search">x</a></button>
+        @endif
+    @endforeach
     </div>
     <!-- <h1>Hey</h1> -->
     <div class="container">
@@ -88,7 +98,10 @@
     </div>
     </body>
     <script>
-    var searchTerms = mySearch.value;
-    console.log(searchTerms);
+    var closebtns = document.getElementsByClassName("close");
+    var i;
+    closebtns.addEventListener("click", function() {
+        this.parentElement.style.display = 'none';
+    }
     </script>
 </html>

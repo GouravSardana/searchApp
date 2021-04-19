@@ -21,11 +21,17 @@ Route::any ( '/search', function () {
         $users = users_details::with(['parent'])
         ->with('school')
         ->paginate (25);
-        return view('welcome')->withUsers($users);
+        $data = [
+            'query' => $q
+        ];
+        return view('welcome',array("data" => $data))->withUsers($users)->with($data);
     }
 
 
     if($q != ""){
+        $data = [
+            'query' => $q
+        ];
         $users = users_details::where ( 'first_name', 'LIKE', '%' . $q . '%' )
         ->orWhere ( 'email', 'LIKE', '%' . $q . '%' )
         ->orWhere ( 'last_name', 'LIKE', '%' . $q . '%' )
@@ -45,10 +51,8 @@ Route::any ( '/search', function () {
         $pagination = $users->appends ( array (
         'q' => Input::get ( 'q' ) 
         ) );
-
         if (count ( $users ) > 0 )
-            // dd($users);
-            return view ( 'welcome' )->withUsers ( $users )->withQuery ( $q );
+            return view ( 'welcome', array("data" => $data))->withUsers ( $users )->withQuery ( $q )->with($data);
         }
         // dd($users);
         return view ( 'nodata' )->withMessage ( 'No Details found. Try to search again !' );
