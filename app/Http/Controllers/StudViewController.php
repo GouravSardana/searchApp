@@ -9,7 +9,7 @@ class StudViewController extends Controller {
 
 public function index(){
         $UserDetail = DB::table('UserDetail')
-        ->join('UsersParentDetail', 'UsersParentDetail.user_id', '=', 'UserDetail.id')->paginate(15);
+        ->join('UserParentDetail', 'UserParentDetail.user_id', '=', 'UserDetail.id')->paginate(15);
 
         return view('welcome',['UserDetail'=>$UserDetail]);
     }

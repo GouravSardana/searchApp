@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
 
             $userids = DB::table('UserDetail')->pluck('id');
 
-            DB::table('UsersParentDetail')->insert([
+            DB::table('UserParentDetail')->insert([
                 'user_id' => $faker->randomElement($userids),
                 'parent_name' => Str::random(10),
                 'parent_email' => Str::random(10).'@gmail.com',

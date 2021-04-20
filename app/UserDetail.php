@@ -10,11 +10,11 @@ class UserDetail extends Model
     public $timestamps= false;
 
     public function parentDetails(){
-        return $this->hasMany('App\UsersParentDetail', 'user_id', 'id');
+        return $this->hasMany('App\UserParentDetail', 'user_id', 'id');
     }
 
     public function parent(){
-        return $this->hasOne('App\UsersParentDetail', 'user_id', 'id');
+        return $this->hasOne('App\UserParentDetail', 'user_id', 'id');
     }
 
     public function school(){

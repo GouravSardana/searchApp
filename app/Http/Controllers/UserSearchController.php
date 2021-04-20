@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\UsersParentDetail;
+use App\UserParentDetail;
 use App\UserResidentialDetail;
 use Illuminate\Support\Facades\Input;
 use App\UserDetail;
+use Illuminate\Support\Facades\DB;
 
 
 class UserSearchController extends Controller
