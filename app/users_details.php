@@ -22,6 +22,3 @@ class users_details extends Model
     }
 
 }
-// ->with(['student' => function($query) {
-//     $query->selectRaw('user_detail_id, firstName, surname, image_240 as image, inv_parent');
-// }])

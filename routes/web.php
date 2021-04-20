@@ -51,6 +51,7 @@ Route::any ( '/search', function () {
         $pagination = $users->appends ( array (
         'q' => Input::get ( 'q' ) 
         ) );
+        
         if (count ( $users ) > 0 )
             return view ( 'welcome', array("data" => $data))->withUsers ( $users )->withQuery ( $q )->with($data);
         }
