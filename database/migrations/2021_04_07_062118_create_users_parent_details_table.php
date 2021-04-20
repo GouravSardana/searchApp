@@ -14,13 +14,13 @@ class CreateUsersParentDetailsTable extends Migration
     public function up()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::create('users_parent_details', function (Blueprint $table) {
+        Schema::create('UsersParentDetail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('parent_name');
             $table->string('parent_email');
             $table->string('parent_phone');
-            $table->foreign('user_id')->references('id')->on('users_details');
+            $table->foreign('user_id')->references('id')->on('UserDetail');
         });
     }
 
@@ -32,7 +32,7 @@ class CreateUsersParentDetailsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('users_parent_details');
+        Schema::dropIfExists('UsersParentDetail');
         Schema::enableForeignKeyConstraints();
     }
 }

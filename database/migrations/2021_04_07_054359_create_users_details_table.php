@@ -13,7 +13,7 @@ class CreateUsersDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_details', function (Blueprint $table) {
+        Schema::create('UserDetail', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('first_name');
@@ -30,6 +30,6 @@ class CreateUsersDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_details');
+        Schema::dropIfExists('UserDetail');
     }
 }

@@ -13,7 +13,7 @@
 <td>Parent Name</td> 
 
 </tr>
-@foreach ($users_details as $user)
+@foreach ($UserDetail as $user)
 <tr>
 <td>{{ $user->first_name }}</td>
 <td>{{ $user->last_name }}</td>

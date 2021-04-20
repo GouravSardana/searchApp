@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-use App\users_details;
+use App\UserDetail;
 
 Route::get('/', function () {
-    $users = users_details::paginate(25);
+    $users = UserDetail::paginate(25);
     return view('welcome')->withUsers($users);
 });
 
@@ -18,7 +18,7 @@ Route::any ( '/search', function () {
     global $q;
     $q = Input::get ( 'q' );
     if($q == ""){
-        $users = users_details::with(['parent'])
+        $users = UserDetail::with(['parent'])
         ->with('school')
         ->paginate (25);
         $data = [
@@ -32,7 +32,7 @@ Route::any ( '/search', function () {
         $data = [
             'query' => $q
         ];
-        $users = users_details::where ( 'first_name', 'LIKE', '%' . $q . '%' )
+        $users = UserDetail::where ( 'first_name', 'LIKE', '%' . $q . '%' )
         ->orWhere ( 'email', 'LIKE', '%' . $q . '%' )
         ->orWhere ( 'last_name', 'LIKE', '%' . $q . '%' )
         ->orWhere ( DB::raw('CONCAT_WS(" ", first_name, last_name)'), 'LIKE', '%' . $q . '%' )

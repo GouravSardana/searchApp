@@ -13,12 +13,12 @@ class CreateSchoolDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_details', function (Blueprint $table) {
+        Schema::create('UserSchoolDetail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('school_name');
             $table->string('school_equired');
-            $table->foreign('user_id')->references('id')->on('users_details');
+            $table->foreign('user_id')->references('id')->on('UserDetail');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateSchoolDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('school_details');
+        Schema::dropIfExists('UserSchoolDetail');
     }
 }

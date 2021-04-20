@@ -13,13 +13,13 @@ class ResidentialDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('residential_details', function (Blueprint $table) {
+        Schema::create('UserResidentialDetail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('city');
             $table->string('state');
             $table->string('country');
-            $table->foreign('user_id')->references('id')->on('users_details');
+            $table->foreign('user_id')->references('id')->on('UserDetail');
         });
     }
 
@@ -30,6 +30,6 @@ class ResidentialDetailsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('UserResidentialDetail');
     }
 }
