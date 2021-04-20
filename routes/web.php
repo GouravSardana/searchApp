@@ -14,47 +14,4 @@ Route::get('view-records','StudViewController@index');
 Route::view('form','userview');
 Route::post('submit','User@save');
 
-Route::any ( '/search', function () {
-    global $q;
-    $q = Input::get ( 'q' );
-    if($q == ""){
-        $users = UserDetail::with(['parent'])
-        ->with('school')
-        ->paginate (25);
-        $data = [
-            'query' => $q
-        ];
-        return view('welcome',array("data" => $data))->withUsers($users)->with($data);
-    }
-
-
-    if($q != ""){
-        $data = [
-            'query' => $q
-        ];
-        $users = UserDetail::where ( 'first_name', 'LIKE', '%' . $q . '%' )
-        ->orWhere ( 'email', 'LIKE', '%' . $q . '%' )
-        ->orWhere ( 'last_name', 'LIKE', '%' . $q . '%' )
-        ->orWhere ( DB::raw('CONCAT_WS(" ", first_name, last_name)'), 'LIKE', '%' . $q . '%' )
-
-        ->with(['parent'], function($query) use($q) {
-            $query->where('parent_name', 'LIKE', '%' . $q . '%');
-            $query->orWhere('parent_email', 'LIKE', '%' . $q . '%');
-        })
-        ->with(['school'], function($query) use($q) {
-            $query->where('school_name', 'LIKE', '%' . $q . '%');
-            $query->orWhere('school_equired', 'LIKE', '%' . $q . '%');
-        })
-        ->paginate (5)->setPath ( '' );
-        
-
-        $pagination = $users->appends ( array (
-        'q' => Input::get ( 'q' ) 
-        ) );
-        
-        if (count ( $users ) > 0 )
-            return view ( 'welcome', array("data" => $data))->withUsers ( $users )->withQuery ( $q )->with($data);
-        }
-        // dd($users);
-        return view ( 'nodata' )->withMessage ( 'No Details found. Try to search again !' );
-    } );
+Route::any ( '/search', 'UserSearchController@search');
