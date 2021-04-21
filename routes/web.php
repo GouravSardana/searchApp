@@ -8,7 +8,7 @@ Route::view('form','userview');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('view-records','StudViewController@index');
-Route::get('search', 'UserSearchController@search')->middleware('auth');
+Route::any('search', 'UserSearchController@search');
 
 Route::post('submit','User@save');
 
